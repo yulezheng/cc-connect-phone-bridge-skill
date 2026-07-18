@@ -1,4 +1,4 @@
-# cc-connect-phone-bridge
+# cc-connect-phone-bridge-skill
 
 用手机（微信 / 飞书）远程指挥本地 Claude Code —— 一个 Claude Code **skill**：平台选型、搭建 SOP、实战避坑、安全收紧，外加一个把长文镜像成飞书云文档 / 知识库的脚本。
 
@@ -18,9 +18,10 @@
 ## 安装为 Claude Code skill
 
 ```bash
-git clone <本仓库>
-ln -s "$(pwd)/cc-connect-phone-bridge" ~/.claude/skills/cc-connect-phone-bridge
-# 或不想用软链：cp -r cc-connect-phone-bridge ~/.claude/skills/
+git clone https://github.com/yulezheng/cc-connect-phone-bridge-skill.git
+# skill 注册名不带 -skill 后缀（与 SKILL.md frontmatter 的 name 一致）：
+ln -s "$(pwd)/cc-connect-phone-bridge-skill" ~/.claude/skills/cc-connect-phone-bridge
+# 或不想用软链：cp -r cc-connect-phone-bridge-skill ~/.claude/skills/cc-connect-phone-bridge
 ```
 
 装好后，当你对 Claude Code 说「想用手机远程指挥本地 Claude」之类的话时，skill 会被自动触发；也可以直接把 `SKILL.md` 当普通文档读——它对任何 agent / 人类都是自包含的。
