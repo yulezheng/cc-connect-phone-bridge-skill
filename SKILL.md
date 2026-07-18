@@ -3,7 +3,7 @@ name: cc-connect-phone-bridge
 description: 用于「想从手机（微信 / 飞书等）远程指挥本地 coding agent（Claude Code / Codex / Gemini / Cursor 等，实测主线为 Claude Code，差异详 §2.1）」时。用 cc-connect(MIT) 把消息平台桥接到本地 coding agent —— 含平台选型（微信 vs 飞书）、单/多 bot 决策、搭建 SOP、实战避坑、安全收紧、以及把长文（plan/设计稿）镜像成飞书云文档的脚本。English keywords for matching：cc-connect feishu lark wechat weixin bot bridge remote control phone mobile messaging long-connection websocket systemd daemon ilink allow_from codex gemini cursor opencode coding agent。
 ---
 
-# 手机远程指挥 Claude Code（cc-connect-phone-bridge）
+# 手机远程指挥本地 coding agent（cc-connect-phone-bridge）
 
 > **底层工具**：[cc-connect](https://github.com/chenhg5/cc-connect)（MIT 许可）—— 一个把飞书 / 微信 / Slack / Telegram 等消息平台桥接到本地 coding agent（Claude Code 等）的 Go 程序。
 > 本 skill 是**使用 SOP + 选型 + 避坑沉淀**（原创，非 cc-connect 文档复制）。命令名 / 配置字段为事实性信息。
@@ -90,7 +90,7 @@ cc-connect 飞书鉴权是**双闸 AND**（不是「加群=群授权」的 OR）
 - **`allow_from`（人闸）**：**所有消息**（私聊+群）先过，发送人 open_id 不在 → 拒；`*`/空 = 任何人。
 - **`allow_chat`（群闸）**：**仅群消息**再过，私聊**不走**这道闸。⚠️ 它**不是**「加群→群里人都能用」，而是「`allow_from=*` 时的**群范围收窄器**」——锁人（具名 `allow_from`）时它**多余**；放开人（`*`）时它把 bot 限定到指定群。
 - **`group_only=true`**：挡**所有**私聊（不分人，含 owner）。
-- **`admin_from`**：管特权命令（`/shell /restart /upgrade /commands addexec /cron addexec`），**默认 blocked**（所有人都不能）；⚠️ **挡不住** `auto`/`bypass` 下 Claude **自己**调 Bash（那受 `mode` 控制）。
+- **`admin_from`**：管特权命令（`/shell /restart /upgrade /commands addexec /cron addexec`），**默认 blocked**（所有人都不能）；⚠️ **挡不住** `auto`/`bypass` 下 agent **自己**调 Bash（那受 `mode` 控制）。
 
 > **群消息 = `allow_from(人) AND allow_chat(群)`**；`allow_from` 是**全局一个闸**（私聊+群共用），没分私聊/群两维 → 「群里开放、私聊只你」**做不到**（cc-connect 缺口，可提 upstream：allow_chat 做成群授权 / 或 allow_from 分两维）。
 
@@ -107,7 +107,7 @@ cc-connect 飞书鉴权是**双闸 AND**（不是「加群=群授权」的 OR）
 
 🔴 **mode 联动硬护栏**：`allow_from` 放开（`*`，即 🅱️🅲️🅳️）+ `mode ∈ {auto, bypassPermissions}` = **任何可达的人能让你机器跑 Bash（RCE）**。开放配法**必须**配 `mode=plan`(只读)/`default`(每次问)，或确信所有可达的人可信。
 
-> ⚠️ **`acceptEdits` 介于两者之间**：它**自动批文件编辑**（Write/Edit 不逐次问），但 **Bash 仍逐次问** → RCE 风险**低于** `auto`/`bypass`。但在开放配法（`allow_from=*`）下，任何可达的人仍能让 Claude **自动改 work_dir 里的文件**（无确认）→ 仍有副作用风险。故开放配法下 **仍建议降到 `plan`/`default`**，别因「不跑 Bash」就放心 `acceptEdits` 全开。
+> ⚠️ **`acceptEdits` 介于两者之间**：它**自动批文件编辑**（Write/Edit 不逐次问），但 **Bash 仍逐次问** → RCE 风险**低于** `auto`/`bypass`。但在开放配法（`allow_from=*`）下，任何可达的人仍能让 agent **自动改 work_dir 里的文件**（无确认）→ 仍有副作用风险。故开放配法下 **仍建议降到 `plan`/`default`**，别因「不跑 Bash」就放心 `acceptEdits` 全开。
 
 💰 **额度归属维度**（决定能否全开放）：bot 背后 token 是**私人订阅**（谁用都薅你额度、反噬卡你本机 CLI、个人订阅 ToS 未必许团队共用）还是**企业专用 key**。私人 → 锁（🅰️）；企业共享 → 🅳️ 可接受。
 

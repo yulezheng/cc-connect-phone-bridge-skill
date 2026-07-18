@@ -1,12 +1,12 @@
 # cc-connect-phone-bridge-skill
 
-用手机（微信 / 飞书）远程指挥本地 Claude Code —— 一个 Claude Code **skill**：平台选型、搭建 SOP、实战避坑、安全收紧，外加一个把长文镜像成飞书云文档 / 知识库的脚本。
+用手机（微信 / 飞书）远程指挥本地 coding agent（Claude Code / Codex / Gemini / Cursor 等，实测主线 Claude Code）—— 一个 Claude Code **skill**：平台选型、搭建 SOP、实战避坑、安全收紧，外加一个把长文镜像成飞书云文档 / 知识库的脚本。
 
-> **EN** — A Claude Code skill for driving your local coding agent from your phone via [cc-connect](https://github.com/chenhg5/cc-connect) (WeChat / Feishu-Lark bridge): platform comparison, setup SOP, battle-tested pitfalls, security hardening, plus `feishu-md2doc.py` for mirroring long markdown (plans / design docs) into Feishu cloud docs & wiki, with a comment fold-back subcommand. Docs are in Chinese.
+> **EN** — A Claude Code skill for driving your local coding agent (Claude Code / Codex / Gemini / Cursor etc., battle-tested with Claude Code) from your phone via [cc-connect](https://github.com/chenhg5/cc-connect) (WeChat / Feishu-Lark bridge): platform comparison, setup SOP, battle-tested pitfalls, security hardening, plus `feishu-md2doc.py` for mirroring long markdown (plans / design docs) into Feishu cloud docs & wiki, with a comment fold-back subcommand. Docs are in Chinese.
 
 ## 这是什么
 
-[cc-connect](https://github.com/chenhg5/cc-connect)（MIT）是把飞书 / 微信 / Slack / Telegram 等消息平台桥接到本地 coding agent 的 Go 程序。本仓库**不是** cc-connect 的文档复刻，而是围绕「手机 ↔ 本地 Claude Code」这个场景的**原创使用沉淀**：
+[cc-connect](https://github.com/chenhg5/cc-connect)（MIT）是把飞书 / 微信 / Slack / Telegram 等消息平台桥接到本地 coding agent 的 Go 程序。本仓库**不是** cc-connect 的文档复刻，而是围绕「手机 ↔ 本地 coding agent」这个场景的**原创使用沉淀**：
 
 | 文件 | 内容 |
 |---|---|
@@ -17,7 +17,7 @@
 
 主线以 Claude Code 为被指挥的 agent（**全部实测基于它**）；cc-connect 的 agent 层可插拔（`codex` / `gemini` / `opencode` / `cursor` 等），平台侧内容对其他 agent 同样适用，差异与替换点见 `SKILL.md` §2.1。
 
-## 安装为 Claude Code skill
+## 安装为 skill
 
 ```bash
 git clone https://github.com/yulezheng/cc-connect-phone-bridge-skill.git
