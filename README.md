@@ -15,6 +15,8 @@
 
 内容全部来自真实搭建与踩坑（含飞书权限「应用身份 vs 用户身份」这种靠后台截图才定位的坑），照单可避。
 
+主线以 Claude Code 为被指挥的 agent（**全部实测基于它**）；cc-connect 的 agent 层可插拔（`codex` / `gemini` / `opencode` / `cursor` 等），平台侧内容对其他 agent 同样适用，差异与替换点见 `SKILL.md` §2.1。
+
 ## 安装为 Claude Code skill
 
 ```bash
@@ -24,7 +26,7 @@ ln -s "$(pwd)/cc-connect-phone-bridge-skill" ~/.claude/skills/cc-connect-phone-b
 # 或不想用软链：cp -r cc-connect-phone-bridge-skill ~/.claude/skills/cc-connect-phone-bridge
 ```
 
-装好后，当你对 Claude Code 说「想用手机远程指挥本地 Claude」之类的话时，skill 会被自动触发；也可以直接把 `SKILL.md` 当普通文档读——它对任何 agent / 人类都是自包含的。
+装好后，当你对 Claude Code 说「想用手机远程指挥本地 Claude」之类的话时，skill 会被自动触发。其他 AI assistant（如 Codex CLI）同理：`SKILL.md` 是自包含 markdown，放进各自的 skills 目录（如 `~/.codex/skills/cc-connect-phone-bridge/`）即可，直接当普通文档读也行。
 
 ## feishu-md2doc.py 速览
 

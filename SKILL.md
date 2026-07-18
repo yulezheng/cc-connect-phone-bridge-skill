@@ -60,6 +60,18 @@ description: 用于「想从手机（微信 / 飞书等）远程指挥本地 Cla
    ⚠️ `auto` / `bypassPermissions` 会**自动执行工具（含 bash）**，方便但危险 → **务必配合 §3 的 allow_from 白名单收紧**，并确认 work_dir。
 6. **长期常驻**（可选）：装成 **systemd user 服务**（非 root：`~/.config/systemd/user/`，无需 sudo）+ `loginctl enable-linger <user>`（关终端 / 退出登录都在；需 sudo 一次）。非 systemd 环境用 `nohup` / `tmux`。⚠️ WSL：Windows 重启 / `wsl --shutdown` 仍会停，开机自启需 Windows 侧另设。
 
+### 2.1 agent 类型：不只 Claude Code（多 agent 注记）
+
+cc-connect 的 agent 层是可插拔的：`[projects.agent] type` 除 `claudecode` 外，上游还支持 `codex` / `gemini` / `opencode` / `cursor` / `iflow` / `qwen`（以你装的版本为准）。想用手机指挥其他 coding agent，换 type 即可接同一套平台桥。
+
+⚠️ **本 skill 全部实测基于 `claudecode`**，换其他 agent 时这样用本文：
+
+- **平台侧内容 agent 无关、直接复用**：§1 选型、§2 搭建、§3 避坑与 §3.1 访问控制矩阵、§4 单/多 bot、§5 云文档脚本、§6 远程仓监控、§7 checklist 的平台项。
+- **三处 claudecode 特定内容需按你的 agent 对应替换（未实测）**：
+  1. §2 第 5 步的 agent options（`model` / `reasoning_effort` / `mode` 是 claudecode 字段，各 agent 的 options 不同，查 cc-connect 文档 / 源码）；
+  2. §3 work_dir 段的 `CLAUDE.md` 只向上读加载机制（如 Codex 对应 `AGENTS.md`，加载语义不同）；
+  3. §3.1 / §7 的 mode-RCE 护栏词汇（`auto` / `bypassPermissions`）——**原理通用**：自动执行工具 + 入站放开 = 任何可达的人能在你机器跑命令；把「低危 mode」映射成你的 agent 的等价权限模式即可。
+
 ---
 
 ## 3. 关键约束 / 避坑（实战踩出，照单避）
