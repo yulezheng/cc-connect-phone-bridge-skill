@@ -49,7 +49,7 @@ python3 feishu-md2doc.py read-comments --project <name> --md plan.md [--write]
 
 ## 前提与免责
 
-- 需要你已有（或按 `SKILL.md` §2 搭好）cc-connect + 一个飞书自建应用 / 微信 bot。
+- **从零开始即可，不需要预先装好 cc-connect 或建好 bot**——skill 会带着你从选型、装 cc-connect 到接平台 bot 走完全程（飞书自建应用由 onboarding 扫码自动创建，无需先去控制台手搓）；个别环节需要你本人配合：手机扫码登录、飞书控制台开云文档权限并发版等。`feishu-md2doc.py` 在搭好之后用（它从 cc-connect 的 `config.toml` 读凭证）。
 - 飞书走官方 bot API，合规；**微信个人号（iLink 通道）自动化属平台灰色地带、有封号风险**，风险自负。
 - `config.toml` 含 token / app_secret：`chmod 600`、放所有 repo 之外、绝不提交。
 
