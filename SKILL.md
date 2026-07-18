@@ -1,6 +1,6 @@
 ---
 name: cc-connect-phone-bridge
-description: 用于「想从手机（微信 / 飞书等）远程指挥本地 Claude Code」时。用 cc-connect(MIT) 把消息平台桥接到本地 coding agent —— 含平台选型（微信 vs 飞书）、单/多 bot 决策、搭建 SOP、实战避坑、安全收紧、以及把长文（plan/设计稿）镜像成飞书云文档的脚本。English keywords for matching：cc-connect feishu lark wechat weixin bot bridge remote control phone mobile messaging long-connection websocket systemd daemon ilink allow_from。
+description: 用于「想从手机（微信 / 飞书等）远程指挥本地 coding agent（Claude Code / Codex / Gemini / Cursor 等，实测主线为 Claude Code，差异详 §2.1）」时。用 cc-connect(MIT) 把消息平台桥接到本地 coding agent —— 含平台选型（微信 vs 飞书）、单/多 bot 决策、搭建 SOP、实战避坑、安全收紧、以及把长文（plan/设计稿）镜像成飞书云文档的脚本。English keywords for matching：cc-connect feishu lark wechat weixin bot bridge remote control phone mobile messaging long-connection websocket systemd daemon ilink allow_from codex gemini cursor opencode coding agent。
 ---
 
 # 手机远程指挥 Claude Code（cc-connect-phone-bridge）
@@ -11,7 +11,7 @@ description: 用于「想从手机（微信 / 飞书等）远程指挥本地 Cla
 
 ## 何时用
 
-用户想「人不在电脑前，用**手机**让本地 Claude Code 干活 / 答疑 / 出方案 / 跑长任务并被通知」。
+用户想「人不在电脑前，用**手机**让本地 Claude Code（或 Codex / Gemini 等其他 coding agent，详 §2.1）干活 / 答疑 / 出方案 / 跑长任务并被通知」。
 
 ---
 
